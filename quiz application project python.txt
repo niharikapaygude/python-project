@@ -1,0 +1,63 @@
+def quiz_app():
+    # Define quiz questions
+    questions = [
+        {
+            "question": "What is the capital of France?",
+            "options": ["1. Berlin", "2. Madrid", "3. Paris", "4. Rome"],
+            "answer": 3
+        },
+        {
+            "question": "Which programming language is this quiz written in?",
+            "options": ["1. Java", "2. Python", "3. C++", "4. Ruby"],
+            "answer": 2
+        },
+        {
+            "question": "What is 5 + 3?",
+            "options": ["1. 5", "2. 8", "3. 10", "4. 15"],
+            "answer": 2
+        }
+    ]
+    
+    score = 0
+    print("Welcome to the Quiz!")
+    print("--------------------")
+    
+    # Ask each question
+    for i, q in enumerate(questions, start=1):
+        print(f"\nQuestion {i}: {q['question']}")
+        for option in q["options"]:
+            print(option)
+        
+        # Get user input
+        while True:
+            try:
+                answer = int(input("Enter the number of your answer: "))
+                if 1 <= answer <= 4:
+                    break
+                else:
+                    print("Please enter a number between 1 and 4.")
+            except ValueError:
+                print("Invalid input. Please enter a number.")
+        
+        # Check if the answer is correct
+        if answer == q["answer"]:
+            print("Correct!")
+            score += 1
+        else:
+            print(f"Wrong! The correct answer was {q['options'][q['answer'] - 1]}.")
+
+#enumerate() function returns list of tuples, where each tuple has 2 elements, 1st is index, 2nd is element,start specifies from which index to start    
+    # Display final score
+    print("\nQuiz Completed!")
+    print(f"Your final score is {score}/{len(questions)}.")
+    
+    # Retry option
+    retry = input("Do you want to retry the quiz? (yes/no): ").strip().lower()
+    if retry == "yes":
+        quiz_app()
+    else:
+        print("Thank you for playing the quiz!")
+
+# Run the quiz application
+if __name__ == "__main__":
+    quiz_app()
